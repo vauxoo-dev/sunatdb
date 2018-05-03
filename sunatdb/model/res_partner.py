@@ -74,14 +74,18 @@ class ResPartner(models.Model):
         return True, 'none', name, name, street, ruc, ubigeo
 
     @api.model
-    def _download_ruc_from_sunat(self):
+    def _get_padron(self):
         _logger.info('Starting Download of the file')
         URL = 'http://www2.sunat.gob.pe/padron_reducido_ruc.zip'
         zip_file, __ = urllib.urlretrieve(URL)
-        zfobj = zipfile.ZipFile(zip_file)
+        self.sunat_padron = zipfile.ZipFile(zip_file)
+
+    @api.model
+    def _download_ruc_from_sunat(self):
         _logger.info('File downloaded')
+        self._get_padron()
         _logger.info('Reading file')
-        lines = zfobj.read('padron_reducido_ruc.txt')
+        lines = self.sunat_padron.read('padron_reducido_ruc.txt')
         _logger.info('Loading partners')
         for register in lines.splitlines()[1:]:
             reg = tuple(self._get_info_from_file(
