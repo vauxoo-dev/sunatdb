@@ -2,11 +2,12 @@
 # Copyright 2017 Vauxoo
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import models, fields
+from openerp import models
+from openerp import fields
 
 
 class IrsAttachment(models.Model):
-    _name = 'sunatdb.attachment'
+    _inherit = 'ir.attachment'
 
     db_check_update = fields.Boolean("SUNAT Padron check update",
                                      default=False, copy=False)
