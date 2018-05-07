@@ -81,7 +81,7 @@ class ResPartner(models.Model):
     def _download_zip_from_sunat(self, url=False):
         _logger.info('Starting Download of the file')
         # The next file is a dummy file....
-        url = "https://raw.githubusercontent.com/umiphos/dummy/master/Dockerfile.zip"
+        url = "https://raw.githubusercontent.com/umiphos/dummy/master/padron_reducido_ruc.zip"
         request = requests.get(url)
         encoded = base64.b64encode(request.content)
         attachment = self.env['ir.attachment'].search(
@@ -107,7 +107,9 @@ class ResPartner(models.Model):
              ('type', '=', 'binary'),
              ('name', '=', 'padron_reducido_ruc'),
              ('db_check_update', '=', False)], limit=1)
-        lines = attachment.datas.read('padron_reducido_ruc.txt')
+        encoded = base64.b64decode(attachment.datas)
+        zip_decoded = zipfile.ZipFile(StringIO(encoded))
+        lines = zip_decoded.read('padron_reducido_ruc.txt')
         _logger.info('Loading partners')
         for register in lines.splitlines()[1:]:
             reg = tuple(self._get_info_from_file(
