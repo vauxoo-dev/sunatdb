@@ -51,10 +51,8 @@ class ResUsers(models.Model):
         self.SELF_READABLE_FIELDS.extend(['access_token', 'authorized'])
         return init_res
 
-    access_token = fields.Char('Access Token',
-                               help='Token to authorize the requests')
-    authorized = fields.Boolean('Authorized',
-                                help='True if this user was authorized '
+    access_token = fields.Char(help='Token to authorize the requests')
+    authorized = fields.Boolean(help='True if this user was authorized '
                                 'to do request')
 
     @api.multi
@@ -74,11 +72,12 @@ class ResUsers(models.Model):
         else:
             return token
 
-    @api.one
+    @api.multi
     def generate_sunat_token(self):
         """Generate tokens to allow users do request to get partners
         information
         """
-        self.write({'access_token': self.random_token()})
-        self.sudo().write({'authorized': True})
+        for item in self:
+            item.write({'access_token': self.random_token()})
+            item.sudo().write({'authorized': True})
         return True

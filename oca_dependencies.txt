@@ -1,0 +1,2 @@
+addons-vauxoo git@github.com:Vauxoo/addons-vauxoo.git
+odoo-apps git@github.com:Vauxoo/odoo-apps.git
