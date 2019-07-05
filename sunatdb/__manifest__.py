@@ -26,7 +26,7 @@
 #
 {
     "name": "Consulting Partners by RUC",
-    "version": "9.0.1.0",
+    "version": "12.0.0.1.0",
     "author": "Vauxoo",
     "category": "SUNATDB\\Peru",
     "website": "http://www.vauxoo.com/",
@@ -39,7 +39,6 @@
     "data": [
         'data/ir_cron.xml',
         'view/res_users_view.xml',
-        'view/webclient_templates.xml',
     ],
     "test": [],
     "js": [],

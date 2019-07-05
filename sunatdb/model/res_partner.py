@@ -29,7 +29,7 @@ import base64
 import logging
 import zipfile
 from collections import OrderedDict
-from StringIO import StringIO
+from io import StringIO
 
 import requests
 

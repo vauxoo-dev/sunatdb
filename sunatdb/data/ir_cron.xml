@@ -10,7 +10,7 @@
             <field name="numbercall">-1</field>
             <field name="nextcall" eval="(DateTime.now() + timedelta(days=2)).strftime('%Y-%m-%d %H:%M:%S')" />
             <field name="doall" eval="False"/>
-            <field name="model" eval="'res.partner'"/>
+            <field name="model_id" ref="model_res_partner"/>
             <field name="function" eval="'_register_new_partners'"/>
             <field name="args" eval="'()'"/>
             <field name="priority">5</field>
@@ -24,7 +24,7 @@
             <field name="numbercall">-1</field>
             <field name="nextcall" eval="(DateTime.now() + timedelta(days=2)).strftime('%Y-%m-%d %H:%M:%S')" />
             <field name="doall" eval="False"/>
-            <field name="model" eval="'res.partner'"/>
+            <field name="model_id" ref="model_res_partner"/>
             <field name="function" eval="'_download_zip_from_sunat'"/>
             <field name="args" eval="'()'"/>
             <field name="priority">5</field>
